@@ -12,3 +12,5 @@
 
 ###### 
 O projeto visa desenvolver um interpretador de comandos para o sistema operativo Linux, incorporando características inovadoras para a melhor eficiência e a usabilidade. A motivação para este trabalho encontra-se em possibilitar aos utilizadores uma experiência mais intuitiva e eficaz no uso do terminal, estabelecendo uma ligação entre comandos internos e externos de forma dinâmica.  
+
+## Casos de Uso
