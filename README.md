@@ -44,11 +44,11 @@ Este projeto está alinhado com os conceitos abordados na unidade curricular de 
 ## Requisitos Técnicos para o desenvolvimento do projeto 
 
 ######
-	Utilização da linguagem de script de Shell: Bash, para desenvolver os comandos necessários.
-	Uso do editor de texto nano para escrever e editar o script de Shell.
-	Disponibilidade de um sistema Linux para desenvolvimento, testes e implantação do script de Shell.
-	Acesso à API de meteorologia IPMA e obtenção de uma chave de API válida para autenticação.
-	Conhecimento sobre requisições HTTP e manipulação de respostas JSON para interagir com a API.
+- Utilização da linguagem de script de Shell: Bash, para desenvolver os comandos necessários.
+- Uso do editor de texto nano para escrever e editar o script de Shell.
+- Disponibilidade de um sistema Linux para desenvolvimento, testes e implantação do script de Shell.
+- Acesso à API de meteorologia IPMA e obtenção de uma chave de API válida para autenticação.
+- Conhecimento sobre requisições HTTP e manipulação de respostas JSON para interagir com a API.
 
 
 
