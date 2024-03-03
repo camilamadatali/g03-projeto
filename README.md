@@ -49,6 +49,28 @@ Este projeto está alinhado com os conceitos abordados na unidade curricular de 
 - Disponibilidade de um sistema Linux para desenvolvimento, testes e implantação do script de Shell.
 - Acesso à API de meteorologia IPMA e obtenção de uma chave de API válida para autenticação.
 - Conhecimento sobre requisições HTTP e manipulação de respostas JSON para interagir com a API.
+- Habilidades em manipulação de estrutura de dados para armazenamento e gestão de tarefas.
+
+## Arquitetura de Solução 
+
+######
+O desenvolvimento de um Shell num sistema Linux começa por uma análise léxica, onde recebe o comando do utilizador para depois ser dividido em tokens devidamente classificados. De seguida na análise sintática são recebidos os tokens, e é verificado se pertencem à linguagem (Shell), para que seja criada uma árvore sintática com base nas regras gramaticais de Shell, analisando a semântica. Por fim, o interpretador é implementado para correr a árvore sintática, interpretar os comandos e executar as ações correspondestes, neste caso, chamar a API IPMA, atualizar tarefas, e criptografar e descriptografar.
+
+## Tecnologias a utilizar
+
+#####
+- Linguagem de programação python para o desenvolvimento do script.
+- Linguagem de script de shell (Bash) para iteração do utilizador com a linha de comandos.
+- Conhecimento sobre requisições HTTP e manipulação de JSON para interagir com a API de meteorologia.
+- Acesso à API de meteorologia IPMA e obtenção de uma chave de API válida.
+- Terminal Linux para testes e implementação.
+- Estrutura de dados eficientes para armazenar e gerir tarefas no interpretador.
+
+# Planeamento e Calendarização
+
+######
+
+
 
 
 
