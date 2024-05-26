@@ -11,7 +11,7 @@
 # Descrição do Problema
 
 ###### 
-O projeto visa desenvolver um interpretador de comandos para o sistema operativo Linux, incorporando características inovadoras para a melhor eficiência e a usabilidade. A motivação para este trabalho encontra-se em possibilitar aos utilizadores uma experiência mais intuitiva e eficaz no uso do terminal, estabelecendo uma ligação entre comandos internos e externos de forma dinâmica.  
+O ambiente Linux oferece uma ampla variedade de funcionalidades e ferramentas para os seus utilizadores. Mas a interação com essas ferramentas requer o uso de comandos complexos e torna-se numa barreira entre o utilizador e o terminal. Por isso, com este projeto queremos possibilitar aos utilizadores uma experiência mais intuitiva e eficaz no uso do terminal, estabelecendo uma ligação entre comandos internos e externos de forma dinâmica.
 
 ## Casos de Uso
 
@@ -32,13 +32,9 @@ O resto das funções não sofreram quaisquer alterações e foram concluídas t
 # Descrição da Solução Implementar
 
 ######
-Encrypt File / Decrypt File: Ambas as funções EncryptFile e DecryptFile operam de maneira semelhante. Primeiro, começam por abrir um arquivo de entrada para leitura e um arquivo de saída para escrita. De seguida, um contexto de criptografia é inicializado com o algoritmo AES em modo ECB e a chave fornecida. 
+Encrypt File: A função EncryptFile realiza a criptografia de um arquivo de entrada usando o algoritmo AES no modo ECB com uma chave especificada. Primeiro, ela abre o arquivo de entrada para leitura e o arquivo de saída para escrita. Em seguida, inicializa um contexto de criptografia com o algoritmo AES e a chave fornecida. A seguir, lê blocos de dados do arquivo de entrada, criptografa cada bloco e escreve o resultado no arquivo de saída. Após o processamento de todos os dados, finaliza o processo de criptografia e fecha os arquivos. 
 
-Os dados do arquivo de entrada são lidos em blocos e processados pela função EVP_EncryptUpdate na EncryptFile e EVP_DecryptUpdate na DecryptFile. Essa função criptografa ou descriptografa os dados e armazena-os num buffer de saída. 
-
-Após o processamento de todos os blocos de dados, as funções EVP_EncryptFinal_ex ou EVP_DecryptFinal_ex são chamadas para finalizar o processo de criptografia ou descriptografia. Qualquer dado final que possa ter sido armazenado no contexto de criptografia é processado e criptografado ou descriptografado. 
-
-Por fim, os dados processados são escritos no arquivo de saída e os recursos são libertados, incluindo o contexto de criptografia e o fecho dos arquivos de entrada e saída. 
+Decrypt File: A função DecryptFile descriptografa um arquivo de entrada que foi previamente criptografado usando o algoritmo AES no modo ECB com uma chave específica. Primeiro, ela abre o arquivo criptografado para leitura e o arquivo de saída para escrita. A seguir, inicializa um contexto de criptografia com o algoritmo AES e a chave fornecida. A função lê os dados criptografados do arquivo de entrada, descriptografa cada bloco e escreve o resultado no arquivo de saída. Após o processamento de todos os dados, finaliza o processo de descriptografia e fecha os arquivos.  
 
 As funções EncryptFile e DecryptFile têm vantagens e desvantagens muito semelhantes. Estas funções oferecem vantagens como a simplicidade de implementação, eficiência de processamento ao operar em blocos de dados moderados e flexibilidade para criptografar e descriptografar arquivos. Por outro lado, enfrentam limitações de segurança devido ao uso do modo ECB, que é vulnerável a certos tipos de ataques, como ataques de repetição. A gestão adequada das chaves também é crucial para garantir a segurança dos dados criptografados. 
 
@@ -59,12 +55,14 @@ Processamento dos Dados JSON: A função WriteCallback processa os dados JSON re
 ## Descrição Genérica
 
 ######
-Com este projeto desenvolvemos um interpretador de comandos para o ambiente Linux, especificamente para o terminal do Ubuntu. O interpretador permite ao utilizador executar os comandos básicos, bem como comandos adicionais diretamente no terminal, de forma eficiente e intuitiva para a interação com o sistema operativo.
+Com este projeto desenvolvemos um interpretador de comandos para o ambiente Linux, especificamente para o terminal do Ubuntu. O interpretador permite ao utilizador executar os comandos básicos, bem como comandos adicionais diretamente no terminal, de forma eficiente e intuitiva para a interação com o sistema operativo.   
+
+Para implementar os comandos internos usámos a função execvp da biblioteca <unistd.h>, que consiste no programa ler o comando de entrada do utilizador, divide esse comando em tokens, cria um processo filho com fork, e no processo filho usa o execvp para substituir o processo atual pelo comando específico. Enquanto isso, o processo pai espera a conclusão do processo filho com wait, garantindo que o shell não aceite novos comandos até que o atual seja finalizado. 
 
 ## Enquadramento nas áreas da Unidade Curricular
 
 ######
-Este projeto envolve a criação de um Shell para Linux enquadra-se nas áreas curriculares de Sistemas Operativos através do gerenciamento de processos, manipulação de arquivos, comunicação entre processos, gerenciamento de tarefas e memória, interação do utilizador com o sistema, e integração de bibliotecas externas.
+Este projeto envolve a criação de um Shell para Linux enquadra-se nas áreas curriculares de Sistemas Operativos através da gestão de processos, manipulação de arquivos, comunicação entre processos, gestão de tarefas, interação do utilizador com o sistema e integração de bibliotecas externas. 
 
 ## Requisitos Técnicos para o desenvolvimento do projeto 
 
@@ -79,7 +77,7 @@ Este projeto envolve a criação de um Shell para Linux enquadra-se nas áreas c
 ######
 O programa é implementado em linguagem C, estruturado em torno de um loop infinito, onde espera pelos comandos inseridos pelo utilizador. A entrada dos comandos é feita através da função ‘DisplayPrompt( )’, que exibe um prompt no terminal do Ubuntu, indicado que está pronto para receber dados. E o comando digitado pelo utilizador é lido através da função ‘fgets( )’ e é armazenado numa variável ‘input’.  
 
-Após a leitura dos comandos, o programa processa os, e verifica se correspondem a comandos internos, como a mudança de diretório, operações de criptografia, consulta da meteorologia, e gestão de tarefas.   
+Após a leitura dos comandos, o programa processa-os e verifica se correspondem a comandos internos e externos que foram implementados. 
 
 Por fim, quando o utilizador digita ‘exit’, as tarefas do momento são guardadas e o arquivo shell é encerrado. 
 
@@ -98,7 +96,7 @@ Por fim, quando o utilizador digita ‘exit’, as tarefas do momento são guard
 
 
 # Resultados
-Neste projeto, foi possível a implementação eficaz do shell personalizado para o ambiente Linux, fornecendo aos utilizadores uma interface mais intuitiva para interagir com o sistema operacional. As funcionalidas adicionais como a criptografia de arquivos, consulta da meteorologia e gestão de tarefas ampliam a utilidade do shell. 
+Neste projeto, foi possível a implementação eficaz do shell personalizado para o ambiente Linux, fornecendo aos utilizadores uma interface mais intuitiva para interagir com o sistema operacional. As funcionalidas adicionais como a criptografia e descriptografia de arquivos, consulta da meteorologia e gestão de tarefas ampliam a utilidade do shell. 
 Pontos fortes da implementação:  
 - Funcionalidades adicionais. 
 - Persistência de dados. 
@@ -106,7 +104,8 @@ Pontos fortes da implementação:
 - Segurança na construção de URL. 
 
 Pontos fracos da implementação: 
-- enfrentam limitações de segurança devido ao uso do modo ECB 
+- Enfrentam limitações de segurança devido ao uso do modo ECB
+- Falta de concorrência. 
 # Bibliografia 
 
 ######
