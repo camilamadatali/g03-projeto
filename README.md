@@ -16,60 +16,97 @@ O projeto visa desenvolver um interpretador de comandos para o sistema operativo
 ## Casos de Uso
 
 ###### 
-Um Interpretador de Comandos para Consulta de Condições Meteorológicas: a Sara pretende ir dar um passeio à tarde, mas ao ver que o tempo está acinzentado fica em dúvida se vai passear ou não, porque não quer apanhar chuva. Para tal, decide ir ao seu terminal Linux e verificar como vai estar a meteorologia daquela tarde, digitando um comando para chamar a API do IPMA no seu terminal, e após os dados processados a Sara vê que vai estar sol.
+Um Interpretador de Comandos para criptografar arquivos:
+Uma clínica armazena informações confidenciais sobre a saúde dos seus pacientes. Para proteger esses dados sensíveis contra acessos não autorizados e garantir a privacidade dos pacientes, a clínica implementou um sistema de criptografia e descriptografia de arquivos. Os médicos e enfermeiros da clínica geram e armazenam arquivos digitais contendo esses dados. Esses arquivos devem ser criptografados antes de serem armazenados nos servidores da clínica. Quando necessário, os arquivos criptografados são descriptografados para serem acedidos pelo pessoal autorizado para revisão e tratamento de dados. 
 
-Um Interpretador de Comandos para Gestão de Tarefas e Lembretes: o Luís é um utilizador ativo do terminal Linux e, para aumentar a sua produtividade, gostava de poder organizar as suas tarefas e receber lembretes diretamente do terminal. Por isso, o Luís cria a sua tarefa a partir do comando ‘criar_tarefa’ no seu terminal e completa os parâmetros como a descrição, data-limite e prioridade. A seguir, o Luís recebe um lembrete que tem uma tarefa que está prestes a expirar, com isto escreve ‘listar_tarefas’ no terminal para visualizar o estado das suas tarefas.
+Um Interpretador de Comandos para Consulta de Condições Meteorológicas:
+A Joana é uma programadora que trabalha remotamente para uma empresa internacional. Um dia, Joana estava calmamente a trabalhar no seu terminal do ubuntu, até que recebe uma chamada do chefe dela e descobre que têm de fazer uma viagem de trabalho urgente para Berlim. Como já se encontrava no terminal do ubuntu e não tinha tempo a perder para se preparar para esta viagem, vai rapidamente ao terminal consultar a meteorologia de Berlim, e começa logo a fazer a sua mala.  
 
-Um Interpretador de Comandos para criptografar arquivos: a Alice pretende armazenar documentos sensíveis no seu computador, mas está preocupada com a segurança destes. Para tal, decide usar o comando de criptografia de arquivos disponível no shell para proteger os dados contra acesso não autorizado. Para isso apenas abre o terminal, chega até ao diretório onde se encontra o arquivo, executa o comando fornecendo o nome do arquivo que deseja criptografar e uma chave de criptografia. Após este processo a Alice tem o seu arquivo criptografado e seguro.
+Um Interpretador de Comandos para Gestão de Tarefas:
+Luís é um aluno de engenharia informática no seu último semestre, e está a sentir-se atrapalhado com a quantidade de projetos, frequências e apresentações que têm de fazer em pouco tempo. E um dos projetos dele é no terminal do ubuntu, por isso como sabe que vai passar muito tempo no terminal, decide gerir as suas tarefas lá, e assim consegue estar mais organizado e ciente da quantidade de trabalho que tem para fazer. 
+
+# Alterações Realizadas
+Em relação à gestão de tarefas foi retirada a funcionalidade dos lembretes, e adicionada as de completar e remover tarefas. Além disso, foi implementado a persistência dos dados para que o utilizador possa visualizar as suas tarefas mesmo se sair do programa. 
+O resto das funções não sofreram quaisquer alterações e foram concluídas tal como esperado. 
 
 # Descrição da Solução Implementar
 
 ######
-Consulta de Meteorologia: O interpretador irá fornecer informações meteorológicas diretamente no terminal do utilizador, consoante a localização desejada, e de forma a destacar dados essenciais, como a temperatura e a previsão dos próximos dias. Tudo isto, é possível utilizando uma API de meteorologia, como a IPMA.
+Encrypt File / Decrypt File: Ambas as funções EncryptFile e DecryptFile operam de maneira semelhante. Primeiro, começam por abrir um arquivo de entrada para leitura e um arquivo de saída para escrita. De seguida, um contexto de criptografia é inicializado com o algoritmo AES em modo ECB e a chave fornecida. 
 
-Gestão de Tarefas e Lembretes: Um interpretador será desenvolvido para permitir aos utilizadores criar, visualizar e gerir tarefas e lembretes diretamente do terminal. Comandos internos específicos, como "criar_tarefa" e "listar_tarefas", serão incorporados para facilitar o processo de gerenciamento de tarefas, adicionar detalhes, e relembrar o utilizador a partir de lembretes.
+Os dados do arquivo de entrada são lidos em blocos e processados pela função EVP_EncryptUpdate na EncryptFile e EVP_DecryptUpdate na DecryptFile. Essa função criptografa ou descriptografa os dados e armazena-os num buffer de saída. 
 
-Criptografia de Arquivos: Um outro interpretador será implementado para oferecer aos utilizadores a capacidade de criptografar e descriptografar arquivos sensíveis diretamente do terminal. Este comando permitirá que os utilizadores protejam os seus arquivos contra acesso não autorizado, fornecendo uma chave de criptografia. O processo de descriptografia será reversível, permitindo aos utilizadores a recuperação dos seus arquivos originais sempre que for necessário. Os utilizadores poderão especificar os arquivos de entrada e uma chave de criptografia.
+Após o processamento de todos os blocos de dados, as funções EVP_EncryptFinal_ex ou EVP_DecryptFinal_ex são chamadas para finalizar o processo de criptografia ou descriptografia. Qualquer dado final que possa ter sido armazenado no contexto de criptografia é processado e criptografado ou descriptografado. 
+
+Por fim, os dados processados são escritos no arquivo de saída e os recursos são libertados, incluindo o contexto de criptografia e o fecho dos arquivos de entrada e saída. 
+
+As funções EncryptFile e DecryptFile têm vantagens e desvantagens muito semelhantes. Estas funções oferecem vantagens como a simplicidade de implementação, eficiência de processamento ao operar em blocos de dados moderados e flexibilidade para criptografar e descriptografar arquivos. Por outro lado, enfrentam limitações de segurança devido ao uso do modo ECB, que é vulnerável a certos tipos de ataques, como ataques de repetição. A gestão adequada das chaves também é crucial para garantir a segurança dos dados criptografados. 
+
+Gestão de Tarefas: A estrutura de dados ‘Task’ é definida para representar cada tarefa, armazena as informações da descrição e estado de cada tarefa. A função ‘addTask’ adiciona uma nova tarefa à lista de tarefas, e verifica se o limite máximo de tarefas foi atingido antes de adicionar uma nova. A função ‘listTasks’ lista todas as tarefas existentes, mostrando o seu índice, estado e descrição. A função ‘completeTask’ mara uma tarefa especifica como concluída com base no índice fornecido. A função ‘removeTask’ remove a tarefa com base no índice fornecido, movendo todas as tarefas restantes uma posição para cima. A função ‘saveTasksFile’ é executada para as tarefas do utilizador serem guardadas num arquivo mesmo depois do utilizador sair do programa. E por fim, a ‘loadTaskFromFile’ é responsável por carregar as tarefas do arquivo guardado.  
+
+Esta implementação é uma boa base para uma aplicação de gestão de tarefas, sendo simples e funcional para as necessidades básicas de um utilizador, tendo baixa dependência de bibliotecas externas e persistência de dados. Mas, para torna esta implementação mais adequada para um público mais amplo e exigente, seria necessário melhorara a escalabilidade, seguranças, interface e adicionar funcionalidades com prazos e prioridades às tarefas. 
+
+Meteorologia: A função GetWeather é usada para obter informações climáticas de uma cidade específica. Ela constrói um URL com base no nome da cidade fornecida e na API_KEY, utilizando a função snprintf para garantir a segurança e evitar problemas de buffer overflow. Em seguida, a função faz uma solicitação HTTP para a URL construída utilizando a biblioteca cURL. 
+
+A função WriteCallback é a função de retorno de chamada configurada pelo cURL para processar os dados recebidos. Ela é responsável por analisar os dados JSON utilizando a biblioteca cJSON, extraindo informações relevantes sobre o clima, como a descrição, temperatura, humidade e velocidade do vento. Esses dados são então formatados e exibidos ao utilizador. 
+
+Construção da URL: A URL é construída dinamicamente utilizando a função snprintf, que permite incorporar de forma segura o nome da cidade e a key da API na string da URL. 
+
+Solicitação HTTP: A solicitação HTTP é realizada através da função curl_easy_perform, configurada com a URL e a função de retorno de chamada WriteCallback para processar os dados recebidos. 
+
+Processamento dos Dados JSON: A função WriteCallback processa os dados JSON recebidos da resposta HTTP. Ela utiliza a biblioteca cJSON para analisar os dados e extrair informações específicas sobre o clima. Por fim estas informações são então apresentadas ao utilizador. 
 
 ## Descrição Genérica
 
 ######
-O projeto visa desenvolver interpretadores de comandos que executam diversas funções, que vá além das funcionalidades tradicionais no sistema operativo Linux. Para a melhor interação entre utilizador e terminal decidimos incorporar o interpretador que será capaz de realizar tarefas específicas, como a consulta de meteorologia, gestão de tarefas e lembretes pelo terminal e criptografia de arquivos.  
+Com este projeto desenvolvemos um interpretador de comandos para o ambiente Linux, especificamente para o terminal do Ubuntu. O interpretador permite ao utilizador executar os comandos básicos, bem como comandos adicionais diretamente no terminal, de forma eficiente e intuitiva para a interação com o sistema operativo.
 
 ## Enquadramento nas áreas da Unidade Curricular
 
 ######
-Este projeto está alinhado com os conceitos abordados na unidade curricular de sistemas operativos. Com a implementação de interpretadores de comandos serão necessários conhecimentos em programação python para desenvolver os scripts, gestão de processos, manipulação de APIs, comunicação de rede, processamento de dados, interação utilizador-sistema e desenvolvimento de interfaces de utilizador.
+Este projeto envolve a criação de um Shell para Linux enquadra-se nas áreas curriculares de Sistemas Operativos através do gerenciamento de processos, manipulação de arquivos, comunicação entre processos, gerenciamento de tarefas e memória, interação do utilizador com o sistema, e integração de bibliotecas externas.
 
 ## Requisitos Técnicos para o desenvolvimento do projeto 
 
 ######
-- Utilização da linguagem de script de Shell: Bash, para desenvolver os comandos necessários.
-- Uso do editor de texto nano para escrever e editar o script de Shell.
-- Disponibilidade de um sistema Linux para desenvolvimento, testes e implantação do script de Shell.
-- Acesso à API de meteorologia IPMA e obtenção de uma chave de API válida para autenticação.
-- Conhecimento sobre requisições HTTP e manipulação de respostas JSON para interagir com a API.
-- Habilidades em manipulação de estrutura de dados para armazenamento e gestão de tarefas.
+- Interpretador de Comandos: O programa deve ser capaz de interpretar comandos inseridos pelos utilizadores no terminal. 
+- Funcionalidades Específicas: Deve suportar funcionalidades, como consultar o clima, criptografar e descriptografar arquivos e gerenciar uma lista de tarefas. 
+- Interatividade: Deve permitir interações contínuas com o utilizador, fornecendo um prompt no terminal e processar os dados inseridos em tempo real.  
+- Tratamento de Erros: Deve ser capaz de lidar com erros de entrada do utilizador. 
 
 ## Arquitetura de Solução 
 
 ######
-O desenvolvimento de um Shell num sistema Linux começa por uma análise léxica, onde recebe o comando do utilizador para depois ser dividido em tokens devidamente classificados. De seguida na análise sintática são recebidos os tokens, e é verificado se pertencem à linguagem (Shell), para que seja criada uma árvore sintática com base nas regras gramaticais de Shell, analisando a semântica. Por fim, o interpretador é implementado para correr a árvore sintática, interpretar os comandos e executar as ações correspondestes, neste caso, chamar a API IPMA, atualizar tarefas, e criptografar e descriptografar.
+O programa é implementado em linguagem C, estruturado em torno de um loop infinito, onde espera pelos comandos inseridos pelo utilizador. A entrada dos comandos é feita através da função ‘DisplayPrompt( )’, que exibe um prompt no terminal do Ubuntu, indicado que está pronto para receber dados. E o comando digitado pelo utilizador é lido através da função ‘fgets( )’ e é armazenado numa variável ‘input’.  
+
+Após a leitura dos comandos, o programa processa os, e verifica se correspondem a comandos internos, como a mudança de diretório, operações de criptografia, consulta da meteorologia, e gestão de tarefas.   
+
+Por fim, quando o utilizador digita ‘exit’, as tarefas do momento são guardadas e o arquivo shell é encerrado. 
 
 ## Tecnologias a utilizar
 
 #####
-- Linguagem de programação python para o desenvolvimento do script.
-- Linguagem de script de shell (Bash) para iteração do utilizador com a linha de comandos.
-- Conhecimento sobre requisições HTTP e manipulação de JSON para interagir com a API de meteorologia.
-- Acesso à API de meteorologia IPMA e obtenção de uma chave de API válida.
-- Terminal Linux para testes e implementação.
-- Estrutura de dados eficientes para armazenar e gerir tarefas no interpretador.
+- Linguagem de Programação C: Utilizada para desenvolver a lógica principal do interpretador de comandos. 
+- Bibliotecas Padrão C:’ <stdio.h>’,’ <stdlib.h>’,’ <string.h>’,’ <unistd.h>’, para funcionalidades básicas de entrada e saída, manipulação de strings, etc. 
+- OpenSSL: Utilizado para criptografar e descriptografar arquivos utilizando o algoritmo AES (Advanced Encryption Standard).  
+- cURL: Utilizado para realizar requisições HTTP e obter dados da API da previsão do tempo. 
+- cJSON: Utilizado para manipulação de dados JSON retornados pela API da meteorologia. 
 
 # Planeamento e Calendarização
 
 ######
 
+
+# Resultados
+Neste projeto, foi possível a implementação eficaz do shell personalizado para o ambiente Linux, fornecendo aos utilizadores uma interface mais intuitiva para interagir com o sistema operacional. As funcionalidas adicionais como a criptografia de arquivos, consulta da meteorologia e gestão de tarefas ampliam a utilidade do shell. 
+Pontos fortes da implementação:  
+- Funcionalidades adicionais. 
+- Persistência de dados. 
+- Integração de bibliotecas externas. 
+- Segurança na construção de URL. 
+
+Pontos fracos da implementação: 
+- enfrentam limitações de segurança devido ao uso do modo ECB 
 # Bibliografia 
 
 ######
