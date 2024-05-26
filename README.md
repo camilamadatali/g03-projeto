@@ -140,7 +140,9 @@ EVP Symmetric Encryption and Decryption - OpenSSLWiki. (n.d.). Wiki.openssl.org.
 https://stackoverflow.com/questions/45709054/create-json-object-using-cjson-h
 
 OpenWeatherMap.org. (2015). Weather API - OpenWeatherMap. Openweathermap.org. https://openweathermap.org/api
+
 C Saving Data from a Text File into an Array of Structures. (n.d.). Stack Overflow. https://stackoverflow.com/questions/50240192/c-saving-data-from-a-text-file-into-an-array-of-structures
+
 C library function - fopen(). (n.d.). Www.tutorialspoint.com. https://www.tutorialspoint.com/c_standard_library/c_function_fopen.htm
 
 
