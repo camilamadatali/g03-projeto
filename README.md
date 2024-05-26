@@ -113,17 +113,11 @@ Pontos fracos da implementação:
 Install, L. P. (2016, January 27). Shell, Bash e Scripts: Tudo sobre Shell Scripting. Desde Linux. https://blog.desdelinux.net/pt/shell-bash-e-scripts-sobre-scripts-de-shell/
 Comandos do bash: ls, head, mv e cat explicados e com exemplos. (2023, November 14). FreeCodeCamp.org. https://www.freecodecamp.org/portuguese/news/comandos-do-bash-ls-head-mv-e-cat-explicados-e-com-exemplos/
 
-IPMA - api. (n.d.). Api.ipma.pt. https://api.ipma.pt/
-
 Weather from terminal. (n.d.). Ask Ubuntu. Retrieved March 2, 2024, from https://askubuntu.com/questions/390329/weather-from-terminal
 
 OpenAI. (2022, November 30). ChatGPT. Chat.openai.com; OpenAI. https://chat.openai.com/
 
-Draw.io. (2024). Flowchart Maker & Online Diagram Software. App.diagrams.net. https://app.diagrams.net/
-
 Jaydatt. (2024, February 21). jaydattpatel/Linux-commands-and-Shell-Scripts. GitHub. https://github.com/jaydattpatel/Linux-commands-and-Shell-Scripts
-
-A Cozy Calendar Setup With Remind. (n.d.). Www.youtube.com. Retrieved March 3, 2024, from https://www.youtube.com/watch?v=4FdMrS4biVE
 
 Saive, R. (2022, September 12). 6 Best To-Do List Managers for Linux Command Line. Www.ubuntumint.com. https://www.ubuntumint.com/command-line-to-do-list-managers/
 
@@ -132,6 +126,22 @@ Dancuk, M. (2023, November 16). SCP Command in Linux {13 Examples} | phoenixNAP 
 Let’s Build a Linux Shell [Part I] | HackerNoon. (n.d.). Hackernoon.com. Retrieved March 3, 2024, from https://hackernoon.com/lets-build-a-linux-shell-part-i-bz3n3vg1
 
 Developing a Linux based shell. (2018, June 18). GeeksforGeeks. https://www.geeksforgeeks.org/developing-linux-based-shell/
+
+Openssl EVP encryption and decryption from a file. (n.d.). Stack Overflow. Retrieved May 26, 2024, from https://stackoverflow.com/questions/44635285/openssl-evp-encryption-and-decryption-from-a-file
+
+EVP Symmetric Encryption and Decryption - OpenSSLWiki. (n.d.). Wiki.openssl.org. https://wiki.openssl.org/index.php/EVP_Symmetric_Encryption_and_Decryption
+
+‌How to decrypt using openssl EVP? (n.d.). Stack Overflow. Retrieved May 26, 2024, from https://stackoverflow.com/questions/65161156/how-to-decrypt-using-openssl-evp
+
+‌Openssl EVP encryption and decryption from a file. (n.d.). Stack Overflow. Retrieved May 26, 2024, from https://stackoverflow.com/questions/44635285/openssl-evp-encryption-and-decryption-from-a-file
+
+‌https://stackoverflow.com/questions/14911156/how-to-properly-reuse-a-curl-handle
+
+https://stackoverflow.com/questions/45709054/create-json-object-using-cjson-h
+
+OpenWeatherMap.org. (2015). Weather API - OpenWeatherMap. Openweathermap.org. https://openweathermap.org/api
+
+‌
 
 
 
