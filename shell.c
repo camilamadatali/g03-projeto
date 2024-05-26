@@ -414,7 +414,7 @@ void removeTask(int index) {
         printf("Índice inválido!\n");
     }
 }
-
+//https://stackoverflow.com/questions/50240192/c-saving-data-from-a-text-file-into-an-array-of-structures
 void saveTasksToFile(const char *filename) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
@@ -428,7 +428,7 @@ void saveTasksToFile(const char *filename) {
 
     fclose(file);
 }
-
+//https://www.tutorialspoint.com/c_standard_library/c_function_fopen.htm
 void loadTasksFromFile(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
